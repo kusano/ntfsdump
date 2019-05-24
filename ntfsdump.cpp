@@ -210,6 +210,18 @@ vector<Run> parseRunList(BYTE *runList, DWORD runListSize, LONGLONG totalCluster
     return result;
 }
 
+void fixRecord(BYTE *buffer, DWORD recordSize, DWORD sectorSize)
+{
+    RecordHeader *header = (RecordHeader *)buffer;
+    LPWORD update = LPWORD(buffer + header->updateOffset);
+
+    if (LPBYTE(update + header->updateNumber) > buffer + recordSize)
+        throw _T("Update sequence number is invalid");
+
+    for (int i=1; i<header->updateNumber; i++)
+        *LPWORD(buffer + i*sectorSize - 2) = update[i];
+}
+
 void readRecord(HANDLE h, LONGLONG recordIndex, vector<Run> &MFTRunList,
     DWORD recordSize, DWORD clusterSize, DWORD sectorSize, BYTE *buffer)
 {
@@ -242,15 +254,7 @@ void readRecord(HANDLE h, LONGLONG recordIndex, vector<Run> &MFTRunList,
             throw _T("Failed to read file record");
     }
 
-    //  Fixup
-    RecordHeader *header = (RecordHeader *)buffer;
-    LPWORD update = LPWORD(buffer + header->updateOffset);
-
-    if (LPBYTE(update + header->updateNumber) > buffer + recordSize)
-        throw _T("Update sequence number is invalid");
-
-    for (int i=1; i<header->updateNumber; i++)
-        *LPWORD(buffer + i*sectorSize - 2) = update[i];
+    fixRecord(buffer, recordSize, sectorSize);
 }
 
 int main()
@@ -332,6 +336,7 @@ int main()
         if (!ReadFile(h, &MFTRecord[0], recordSize, &read, NULL) ||
             read != recordSize)
             throw _T("Failed to read MFT record");
+        fixRecord(&MFTRecord[0], recordSize, bootSector.bytePerSector);
         RecordHeader *MFTRecordHeader = (RecordHeader *)&MFTRecord[0];
 
         AttributeHeaderNR *MFTData = (AttributeHeaderNR *)findAttribute(
