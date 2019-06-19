@@ -635,12 +635,10 @@ int main()
             }
             else
             {
-                _tprintf(_T("File size: %lld\n"), runList.size());
-
                 vector<BYTE> cluster(clusterSize);
                 LONGLONG writeSize = 0;
 
-                _tprintf(_T("Run list:\n"));
+                _tprintf(_T("Run list: %lld\n"), runList.size());
                 for (Run &run: runList)
                 {
                     _tprintf(_T("  %16llx %16llx\n"), run.offset, run.length);

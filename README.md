@@ -5,7 +5,7 @@ Extract files from NTFS Volume.
 Administrator privilege may be required.
 
 ```
->ntfsdump C
+ntfsdump>ntfsdump C
 OEM ID: "NTFS    "
 Byte/Sector: 512
 Sector/Cluster: 8
@@ -51,7 +51,7 @@ File List:
  :
 ```
 ```
->ntfsdump C 1215192 hoge.txt
+ntfsdump>ntfsdump C 1215192 hoge.txt
 OEM ID: "NTFS    "
 Byte/Sector: 512
 Sector/Cluster: 8
@@ -75,13 +75,12 @@ MFT run list: 8
 Record index: 1215192
 Output file name: hoge.txt
 Stage: 2 ($Data is non-resident)
-File size: 1
-Run list:
+Run list: 1
              56652                6
 Success
 ```
 ```
->type hoge.txt
+ntfsdump>type hoge.txt
 #define WIN32_LEAN_AND_MEAN
 #include <cstdio>
 #include <Windows.h>
