@@ -6,18 +6,26 @@ Administrator privilege may be required.
 
 ```
 >ntfsdump C
+OEM ID: "NTFS    "
+Byte/Sector: 512
+Sector/Cluster: 8
+Total Sector: 998955007
+Cluster of MFT: 786432
+Cluster/Record: 4294967286
 Cluster Size: 4096
 Record Size: 1024
-MFT size: 1409286144
-Record number: 1376256
-MFT run list:
-             c0000             cb40
-          15d0eb7e             c802
-          1f348c69             c837
-           c711b1f             c801
-          1f03d5b5             c80b
-          315a9f0d             c813
-          25071a50             8c68
+MFT stage: 2
+MFT size: 1245446144
+Record number: 1216256
+MFT run list: 8
+             c0000             c820
+           23d660e             c812
+           13c9750             c810
+           29130b0              6fe
+           657e638             38a8
+           4a306e8            11518
+           3b18165             cd4d
+           3a0fa02             2973
 File List:
            0       $MFT
            1       $MFTMirr
@@ -38,43 +46,42 @@ File List:
           16 -
  :
  :
-     1375296       ntfsdump.cpp
+     1215192       ntfsdump.cpp
  :
  :
 ```
 ```
->ntfsdump C 1375296 hoge.txt
+>ntfsdump C 1215192 hoge.txt
 OEM ID: "NTFS    "
 Byte/Sector: 512
 Sector/Cluster: 8
-Total Sector: 7813771263
+Total Sector: 998955007
 Cluster of MFT: 786432
 Cluster/Record: 4294967286
 Cluster Size: 4096
 Record Size: 1024
-MFT size: 1409286144
-Record number: 1376256
-MFT run list:
-             c0000             cb40
-          15d0eb7e             c802
-          1f348c69             c837
-           c711b1f             c801
-          1f03d5b5             c80b
-          315a9f0d             c813
-          25071a50             8c68
-Record index: 1375296
+MFT stage: 2
+MFT size: 1245446144
+Record number: 1216256
+MFT run list: 8
+             c0000             c820
+           23d660e             c812
+           13c9750             c810
+           29130b0              6fe
+           657e638             38a8
+           4a306e8            11518
+           3b18165             cd4d
+           3a0fa02             2973
+Record index: 1215192
 Output file name: hoge.txt
-$Data in the record
-Non-resident
-File size: 21516
+Stage: 2 ($Data is non-resident)
+File size: 1
 Run list:
-           217c7aa                1
-           abadf22                3
-           abadf32                2
+             56652                6
 Success
 ```
 ```
->cat hoge.txt
+>type hoge.txt
 #define WIN32_LEAN_AND_MEAN
 #include <cstdio>
 #include <Windows.h>
