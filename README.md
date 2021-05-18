@@ -1,5 +1,4 @@
-ntfsdump
-====
+# ntfsdump
 
 Extract files from NTFS Volume.
 Administrator privilege may be required.
@@ -92,3 +91,16 @@ ntfsdump>type hoge.txt
  :
  :
 ```
+
+## License
+
+[MIT License](https://github.com/kusano/ntfsdump/blob/master/LICENSE).
+
+Note that this software is based on the following documents:
+
+- http://www.writeblocked.org/resources/ntfs_cheat_sheets.pdf
+- https://flatcap.org/linux-ntfs/ntfs/
+- http://www.kes.talktalk.net/ntfs/
+- http://blogs.technet.com/b/askcore/archive/2009/10/16/the-four-stages-of-ntfs-file-growth.aspx
+
+As mentioned in the license file, I make no warranty that this software does not infringe owners of these documents and Microsoft Corporation's rights.
